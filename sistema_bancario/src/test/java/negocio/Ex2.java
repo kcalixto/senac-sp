@@ -18,7 +18,7 @@ public class Ex2 {
 	static final int idConta01 = 1;
 	static final int idConta02 = 2;
 
-//	Saldo suficiente em ambas as contas	
+	// Saldo suficiente em ambas as contas
 	@Test
 	public void testiransferevalor01() {
 		ContaCorrente conta01 = new ContaCorrente(idConta01, 200, true);
@@ -39,8 +39,8 @@ public class Ex2 {
 		assertEquals(conta01.getSaldo(), 100.0, delta);
 		assertEquals(conta02.getSaldo(), 100.0, delta);
 	}
-	
-//	Saldo insuficiente e positivo na Conta 1
+
+	// Saldo insuficiente e positivo na Conta 1
 	@Test
 	public void testiransferevalor02() {
 		ContaCorrente conta01 = new ContaCorrente(idConta01, 100, true);
@@ -61,8 +61,8 @@ public class Ex2 {
 		assertEquals(conta01.getSaldo(), -100.00, delta);
 		assertEquals(conta02.getSaldo(), 200.0, delta);
 	}
-	
-//	Saldo insuficiente e negativo na Conta 1
+
+	// Saldo insuficiente e negativo na Conta 1
 	@Test
 	public void testiransferevalor03() {
 		ContaCorrente conta01 = new ContaCorrente(idConta01, -100, true);
@@ -83,8 +83,8 @@ public class Ex2 {
 		assertEquals(conta01.getSaldo(), -300.00, delta);
 		assertEquals(conta02.getSaldo(), 200.0, delta);
 	}
-	
-//	Saldo insuficiente em ambas as contas
+
+	// Saldo insuficiente em ambas as contas
 	@Test
 	public void testiransferevalor04() {
 		ContaCorrente conta01 = new ContaCorrente(idConta01, -100, true);

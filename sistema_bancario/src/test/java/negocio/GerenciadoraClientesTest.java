@@ -2,6 +2,7 @@ package negocio;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -66,6 +67,56 @@ public class GerenciadoraClientesTest {
 		assertTrue(clienteRemovido);
 		assertEquals(gerClientes.getClientesDoBanco().size(), 1);
 		assertNull(gerClientes.pesquisaCliente(idCliente02));
+	}
+
+	@Test
+	public void IdadeValida() throws IdadeNaoPermitidaException {
+		/* ======== Execução ======== */
+		Cliente neymar = new Cliente(
+				1, "Neymar Jr.",
+				18,
+				"neymar@gmail.com",
+				1,
+				true);
+		boolean idadeValida = gerClientes.validaIdade(neymar.getIdade());
+
+		/* ========Verificação ========== */
+
+		assertTrue(idadeValida);
+	}
+
+	/**
+	 * Teste básico de validação de idade
+	 * 
+	 */
+	@Test
+	public void ValidaIdadeInvalida() throws IdadeNaoPermitidaException {
+		/* ======== Montagem de Cenário ======== */
+		Cliente faustao = new Cliente(2, "Faustão", 17, "faustao@gmail.com", 1, false);
+		Cliente alex = new Cliente(3, "alex", 66, "faustao@gmail.com", 1, false);
+
+		IdadeNaoPermitidaException faustao_error = null;
+		IdadeNaoPermitidaException alex_error = null;
+
+		/* ======== Execução ======== */
+
+		try {
+			gerClientes.validaIdade(faustao.getIdade());
+		} catch (Exception e) {
+			faustao_error = (IdadeNaoPermitidaException) e;
+		}
+
+		try {
+			gerClientes.validaIdade(alex.getIdade());
+		} catch (Exception e) {
+			alex_error = (IdadeNaoPermitidaException) e;
+		}
+
+		/* ========Verificação ========== */
+
+		assertEquals(faustao_error.getMessage(), IdadeNaoPermitidaException.MSG_IDADE_INVALIDA);
+		assertEquals(alex_error.getMessage(), IdadeNaoPermitidaException.MSG_IDADE_INVALIDA);
+
 	}
 
 }

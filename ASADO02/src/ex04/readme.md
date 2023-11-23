@@ -1,0 +1,1 @@
+4) Modificar o exemplo passado em aula utilizando Enum.

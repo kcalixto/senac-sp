@@ -1,7 +1,10 @@
 package ex01;
 
+import ex01.client.Jogo;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("ex01");
+        Jogo jogo = new Jogo();
+        jogo.comecarJogo();
     }
 }

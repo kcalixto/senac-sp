@@ -18,9 +18,7 @@ public class Jogo {
             Jogador j1 = new Jogador(s.nextLine());
             System.out.println("Jogador 1: " + j1.getNome());
 
-            System.out.println(String.format(
-                    "Olá %s, vamos começar o jogo!\n Suas missões são: Correr 1 vezes e Pular 2 vezes, se você Correr duas vezes cairá em algum buraco e morrerá instantânemanete!",
-                    j1.getNome()));
+            mostrarObjetivos(j1);
 
             int acao = ACAO_NENHUMA;
             while (acao != ACAO_SAIR) {
@@ -30,6 +28,12 @@ public class Jogo {
         } catch (JogadorMortoException e) {
             System.exit(0);
         }
+    }
+
+    private void mostrarObjetivos(Jogador j1) {
+        System.out.println(String.format(
+                "Olá %s, vamos começar o jogo!\n Suas missões são: Correr 1 vezes e Pular 2 vezes, se você Correr duas vezes cairá em algum buraco e morrerá instantânemanete!",
+                j1.getNome()));
     }
 
     private int perguntarAcao(Scanner s, Jogador j1) throws JogadorMortoException {

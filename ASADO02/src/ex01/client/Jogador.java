@@ -53,4 +53,8 @@ public class Jogador {
         this.estado = estado;
     }
 
+    public Estado[] getObjetivos() {
+        return objetivos;
+    }
+
 }

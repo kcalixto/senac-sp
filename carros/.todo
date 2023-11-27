@@ -1,0 +1,35 @@
+- Ao incluir um novo item, todos os campos devem ser preenchidos com valores
+  válidos. O sistema deve apresentar erro caso fique algum campo em branco ou
+  com formato ou valor inválido
+    • Caso ocorra erro de validação em algum campo, todos os demais dados preenchidos
+      corretamente devem ser reapresentados já preenchidos na tela.
+    • A validação deve ser feita OBRIGATORIAMENTE do lado da aplicação rodando no servidor.
+
+- A navegação entre as telas de listagem e formulário só poderá ser feita através de
+  cliques em links ou botões. Com exceção do acesso inicial, haverá desconto na
+  nota caso seja necessário digitar manualmente as URLs
+
+- Adicionar no diretório /src/main/resources/static um arquivo index.html
+  disponibilizado anexo ao enunciado, contendo o nome completo e eventuais
+  observações sobre o desenvolvimento preenchidas. A falta deste arquivo no
+  projeto entregue irá ANULAR a entrega
+
+- Pode-se usar a técnica AJAX com XMLHttpRequest, Fetch API ou similar para listar
+  e salvar as informações da série, seguindo os exemplos desenvolvidos em aula.
+
+- Bibliotecas e frameworks de frontend, como por exemplo Bootstrap,
+  React, Angular ou Vue podem ser usados. Neste caso, será necessário
+  especificar o comando necessário para iniciar o projeto do frontend
+  no index.html
+
+- Alternativamente, pode-se desenvolver o projeto usando o modelo
+  web tradicional com Thymeleaf. Neste caso, atentar-se ao uso do
+  POST-REDIRECT-GET após salvar um novo carro para evitar o reenvio
+  dos dados ao atualizar a tela com o resultado.
+
+- A modelagem adequada da classe que representa uma entidade
+  Carro faz parte da avaliação.
+  
+- O projeto deve ser desenvolvido usando Java 17 e Spring Boot 3,
+  conforme os exemplos desenvolvidos em aula. Uso de versões
+  anteriores irão acarretar desconto na nota.

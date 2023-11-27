@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Incluir novo Carro</h1>
+
+        <form th:action="@{/carros/cadastro}" method="post" th:object="${carro}" class="needs-validation">
+            <div class="form-group my-3">
+                <label for="modelo">Modelo:</label>
+                <input type="text" class="form-control" id="modelo" name="modelo" th:field="*{modelo}">
+                <span th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="fabricante">Fabricante:</label>
+                <input type="text" class="form-control" id="fabricante" th:field="*{fabricante}">
+                <span th:if="${#fields.hasErrors('fabricante')}" th:errors="*{fabricante}" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="anoLancamento">Ano de Lançamento:</label>
+                <input type="text" class="form-control" id="anoLancamento" th:field="*{anoLancamento}">
+                <span th:if="${#fields.hasErrors('anoLancamento')}" th:errors="*{anoLancamento}"
+                    class="text-danger"></span>
+            </div>
+
+            <a href="/carros" class="btn btn-light my-2">Voltar</a>
+            <button type="submit" class="btn btn-success my-2">Enviar</button>
+        </form>
+    </div>
+</body>
+
+</html>

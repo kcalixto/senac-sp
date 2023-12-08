@@ -7,12 +7,14 @@ import HttpClient from '../../api/httpClient.js'
 export default function Listagem() {
     const httpClient = new HttpClient()
 
-    const [carros, setCarros] = useState([]);
+    const [carros, setCarros] = useState({ success: false, data: [] });
     useEffect(() => {
-        httpClient.getAllCars()
-            .then(setCarros)
-            .catch(console.log)
-    }, [httpClient])
+        if (httpClient) {
+            httpClient.getAllCars()
+                .then(setCarros)
+                .catch(console.log)
+        }
+    }, [])
 
     return (
         <div>
@@ -22,7 +24,7 @@ export default function Listagem() {
 
                 <hr />
                 {
-                    carros.length > 0 &&
+                    carros.data.length > 0 &&
                     <Table striped bordered hover>
                         <thead>
                             <tr>
@@ -34,7 +36,7 @@ export default function Listagem() {
                         </thead>
                         <tbody>
                             {
-                                carros.map((carro, index) => (
+                                carros.data.map((carro, index) => (
                                     <tr key={index}>
                                         <td>{carro?.id}</td>
                                         <td>{carro?.modelo}</td>
@@ -47,6 +49,15 @@ export default function Listagem() {
                     </Table>
                 }
 
+                {
+                    carros.data.length === 0 &&
+                    <div style={{
+                        paddingTop: "1rem",
+                    }}>
+                        <h3>Não há carros cadastrados.</h3>
+                    </div>
+                }
+
                 <Button variant={"primary"}>
                     <Link
                         to="/carros/cadastro"
@@ -57,15 +68,6 @@ export default function Listagem() {
                         Incluir novo
                     </Link>
                 </Button>
-
-                {
-                    carros.length === 0 &&
-                    <div style={{
-                        paddingTop: "1rem",
-                    }}>
-                        <h3>Não há carros cadastrados.</h3>
-                    </div>
-                }
             </div>
         </div >
     )

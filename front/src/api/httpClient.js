@@ -72,9 +72,19 @@ export default class HttpClient {
             const { data } = await this.client.post("/carros/cadastro", car);
             response.data = data
         } catch (error) {
-            console.log({ error });
-
             response.success = false;
+
+            if (error?.code === "ERR_BAD_REQUEST") {
+                const validationErrors = error?.response?.data?.errors;
+                if (validationErrors?.length > 0) {
+                    validationErrors.forEach(err => {
+                        response.data[err.field] = err.defaultMessage;
+                    });
+
+                    return response
+                }
+            }
+
             response.data = {
                 message: "Erro ao salvar o novo carro",
                 error: error.message,

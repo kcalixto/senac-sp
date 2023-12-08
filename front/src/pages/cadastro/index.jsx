@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HttpClient from "../../api/httpClient";
 
 // Validações dos campos
@@ -17,7 +17,7 @@ function validateAnoLancamento(anoLancamento) {
 }
 
 // Executa todas as validações e retorna true se houver algum erro
-function haveErrors(form) {
+function haveErrors(form, setErrors) {
     let haveErrors = false
     if (validateModelo(form.modelo)) {
         setErrors((errors) => ({ ...errors, modelo: 'Modelo inválido' }))
@@ -37,6 +37,7 @@ function haveErrors(form) {
 
 export default function Cadastro() {
     const httpClient = new HttpClient()
+    const navigate = useNavigate()
 
     const [form, setForm] = useState({
         modelo: '',
@@ -61,13 +62,21 @@ export default function Cadastro() {
 
     function onSubmit(event) {
         event.preventDefault()
-        if (haveErrors(form)) return
+        if (haveErrors(form, setErrors)) return
 
         httpClient.saveNewCar(form)
-            .then((response) => {
-                console.log(response);
+            .then(({ success, data }) => {
+                if (success) {
+                    navigate("/carros")
+                }
+
+                if (!success) {
+                    Object.keys(data).forEach((errorField) => {
+                        console.log({ errorField });
+                        setErrors((errors) => ({ ...errors, [errorField]: data[errorField] }))
+                    })
+                }
             })
-            .catch(console.log)
     }
 
     return (
@@ -113,7 +122,7 @@ export default function Cadastro() {
 
                         <Form.Label htmlFor="anoLancamento">Ano Lançamento:</Form.Label>
                         <Form.Control
-                            type="text"
+                            type="number"
                             name="anoLancamento"
                             id="anoLancamento"
                             onChange={({ target: { value } }) => value && updateFormData('anoLancamento', value)}

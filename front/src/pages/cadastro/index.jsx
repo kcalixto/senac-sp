@@ -67,7 +67,11 @@ export default function Cadastro() {
         httpClient.saveNewCar(form)
             .then(({ success, data }) => {
                 if (success) {
-                    navigate("/carros")
+                    navigate("/carros", {
+                        state: {
+                            message: "Carro cadastrado com sucesso!"
+                        }
+                    })
                 }
 
                 if (!success) {

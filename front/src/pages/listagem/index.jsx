@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react"
 import Table from 'react-bootstrap/Table';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import HttpClient from '../../api/httpClient.js'
+import { Alert } from "react-bootstrap";
 
 export default function Listagem() {
     const httpClient = new HttpClient()
+    const { state } = useLocation()
 
     const [carros, setCarros] = useState({ success: false, data: [] });
     useEffect(() => {
@@ -21,6 +23,13 @@ export default function Listagem() {
             <div className="container mt-5">
                 <h1>TADS - Atividade DSW</h1>
                 <h3>Turma A 23-2 - Carros</h3>
+
+                {
+                    state?.message &&
+                    <Alert variant="success">
+                        {state.message}
+                    </Alert>
+                }
 
                 <hr />
                 {

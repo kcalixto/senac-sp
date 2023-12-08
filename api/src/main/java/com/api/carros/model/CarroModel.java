@@ -21,18 +21,18 @@ public class CarroModel {
     private String fabricante;
 
     @Column(nullable = false)
-    private String anoLancamento;
+    private int anoLancamento;
 
     public CarroModel() {
     }
 
-    public CarroModel(String modelo, String fabricante, String anoLancamento) {
+    public CarroModel(String modelo, String fabricante, int anoLancamento) {
         this.modelo = modelo;
         this.fabricante = fabricante;
         this.anoLancamento = anoLancamento;
     }
 
-    public CarroModel(long id, String modelo, String fabricante, String anoLancamento) {
+    public CarroModel(long id, String modelo, String fabricante, int anoLancamento) {
         this.id = id;
         this.modelo = modelo;
         this.fabricante = fabricante;
@@ -63,11 +63,11 @@ public class CarroModel {
         this.fabricante = fabricante;
     }
 
-    public String getAnoLancamento() {
+    public int getAnoLancamento() {
         return anoLancamento;
     }
 
-    public void setAnoLancamento(String anoLancamento) {
+    public void setAnoLancamento(int anoLancamento) {
         this.anoLancamento = anoLancamento;
     }
 

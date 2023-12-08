@@ -3,38 +3,6 @@ import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import HttpClient from "../../api/httpClient";
 
-// Validações dos campos
-function validateModelo(modelo) {
-    return modelo.length < 3 || !modelo
-}
-
-function validateFabricante(fabricante) {
-    return fabricante.length < 3 || !fabricante
-}
-
-function validateAnoLancamento(anoLancamento) {
-    return anoLancamento < 1900 || anoLancamento > new Date().getFullYear() || !anoLancamento
-}
-
-// Executa todas as validações e retorna true se houver algum erro
-function haveErrors(form, setErrors) {
-    let haveErrors = false
-    if (validateModelo(form.modelo)) {
-        setErrors((errors) => ({ ...errors, modelo: 'Modelo inválido' }))
-        haveErrors = true
-    }
-    if (validateFabricante(form.fabricante)) {
-        setErrors((errors) => ({ ...errors, fabricante: 'Fabricante inválido' }))
-        haveErrors = true
-    }
-    if (validateAnoLancamento(form.anoLancamento)) {
-        setErrors((errors) => ({ ...errors, anoLancamento: 'Ano de lançamento inválido' }))
-        haveErrors = true
-    }
-
-    return haveErrors
-}
-
 export default function Cadastro() {
     const httpClient = new HttpClient()
     const navigate = useNavigate()
@@ -62,8 +30,6 @@ export default function Cadastro() {
 
     function onSubmit(event) {
         event.preventDefault()
-        if (haveErrors(form, setErrors)) return
-
         httpClient.saveNewCar(form)
             .then(({ success, data }) => {
                 if (success) {
@@ -76,7 +42,6 @@ export default function Cadastro() {
 
                 if (!success) {
                     Object.keys(data).forEach((errorField) => {
-                        console.log({ errorField });
                         setErrors((errors) => ({ ...errors, [errorField]: data[errorField] }))
                     })
                 }

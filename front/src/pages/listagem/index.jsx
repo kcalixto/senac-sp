@@ -7,6 +7,7 @@ import { Alert } from "react-bootstrap";
 
 export default function Listagem() {
     const httpClient = new HttpClient()
+    const [showAlert, setShowAlert] = useState(true)
     const { state } = useLocation()
 
     const [carros, setCarros] = useState({ success: false, data: [] });
@@ -14,7 +15,7 @@ export default function Listagem() {
         if (httpClient) {
             httpClient.getAllCars()
                 .then(setCarros)
-                .catch(console.log)
+                .catch(console.error)
         }
     }, [])
 
@@ -26,7 +27,10 @@ export default function Listagem() {
 
                 {
                     state?.message &&
-                    <Alert variant="success">
+                    <Alert
+                        variant="success"
+                        onClick={() => setShowAlert((showAlert) => !showAlert)}
+                        show={showAlert}>
                         {state.message}
                     </Alert>
                 }

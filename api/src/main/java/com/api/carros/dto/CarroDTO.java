@@ -1,23 +1,29 @@
 package com.api.carros.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class CarroDTO {
     private Long id;
 
     @NotBlank(message = "Não deve estar em branco")
+    @Size(min = 2, max = 50, message = "Deve conter entre 2 e 50 caracteres")
     private String modelo;
 
     @NotBlank(message = "Não deve estar em branco")
+    @Size(min = 2, max = 50, message = "Deve conter entre 2 e 50 caracteres")
     private String fabricante;
 
-    @NotBlank(message = "Não deve estar em branco")
-    private String anoLancamento;
+    @Min(value = 1900, message = "Deve ser maior que 1900")
+    @Max(value = 2023, message = "Não pode ser maior que o ano atual")
+    private int anoLancamento;
 
     public CarroDTO() {
     }
 
-    public CarroDTO(Long id, String modelo, String fabricante, String anoLancamento) {
+    public CarroDTO(Long id, String modelo, String fabricante, int anoLancamento) {
         this.id = id;
         this.modelo = modelo;
         this.fabricante = fabricante;
@@ -48,11 +54,11 @@ public class CarroDTO {
         this.fabricante = fabricante;
     }
 
-    public String getAnoLancamento() {
+    public int getAnoLancamento() {
         return anoLancamento;
     }
 
-    public void setAnoLancamento(String anoLancamento) {
+    public void setAnoLancamento(int anoLancamento) {
         this.anoLancamento = anoLancamento;
     }
 }

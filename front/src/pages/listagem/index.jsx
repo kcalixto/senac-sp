@@ -21,7 +21,7 @@ export default function Listagem() {
 
     return (
         <div>
-            <div className="container mt-5">
+            <div className="container my-5">
                 <h1>TADS - Atividade DSW</h1>
                 <h3>Turma A 23-2 - Carros</h3>
 

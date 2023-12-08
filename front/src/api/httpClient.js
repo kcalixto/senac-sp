@@ -5,44 +5,19 @@ export default class HttpClient {
     constructor() {
         this.client = axios.create({
             baseURL: "http://localhost:8080",
+            headers: {
+                "Content-Type": "application/json",
+            }
         })
     }
 
     async getAllCars() {
-        return [
-            {
-                id: 1,
-                modelo: "Uno",
-                fabricante: "Fiat",
-                anoLancamento: 1990,
-            },
-            {
-                id: 2,
-                modelo: "Gol",
-                fabricante: "Volkswagen",
-                anoLancamento: 2010,
-            },
-            {
-                id: 3,
-                modelo: "Palio",
-                fabricante: "Fiat",
-                anoLancamento: 2000,
-            },
-            {
-                id: 4,
-                modelo: "Celta",
-                fabricante: "Chevrolet",
-                anoLancamento: 2005,
-            }
-        ]
-
-
         const response = {
             success: true,
             data: {},
         }
         try {
-            const { data } = await this.client.get(`${url}/carros`);
+            const { data } = await this.client.get("/carros");
             response.data = data
         } catch (error) {
             response.success = false;
@@ -66,7 +41,7 @@ export default class HttpClient {
                 throw new Error("Id não informado");
             }
 
-            const { data } = await this.client.get(`${url}/carros/${id}`);
+            const { data } = await this.client.get(`/carros/${id}`);
             response.data = data
         } catch (error) {
             response.success = false;
@@ -94,14 +69,14 @@ export default class HttpClient {
                 throw new Error("Dados de cadastro não informados");
             }
 
-            const { data } = await this.client.post(`${url}/carros`, car);
+            const { data } = await this.client.post("/carros/cadastro", car);
             response.data = data
         } catch (error) {
             console.log({ error });
 
             response.success = false;
             response.data = {
-                message: "Erro ao busca um carro",
+                message: "Erro ao salvar o novo carro",
                 error: error.message,
             };
         } finally {
